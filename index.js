@@ -325,15 +325,13 @@ console.log('================ The algorithms task begins here ================')
 
 
 
-function bubbleSort(array, property) {
-  //this only will sort the price because idk how to dynamically assign a property to sort
+function bubbleSort(array) {
  
 
   /**
    * Sorts a given array with the bubble sort method
    * 
    * @param {object} An array
-   * @param {string} The... title? of the part of the object to search for
    * 
    * @return {object} An array sorted from smallest to greatest
    * 
@@ -343,10 +341,9 @@ function bubbleSort(array, property) {
   let copiedArray = []
   copiedArray = array.concat()
   let changeCount = 0
-  let didItNotCHange = 0
   let itemA = copiedArray[indexNumber]
   let itemB = copiedArray[indexNumber + 1]
-  let passNumber = 1
+  // let passNumber = 1
 
   
   while (true) {
@@ -358,7 +355,7 @@ function bubbleSort(array, property) {
       indexNumber = 0
       changeCount = 0
       passNumber += 1
-      console.log('Pass #' + passNumber)
+      // console.log('Pass #' + passNumber)
     }
 
     else if (parseFloat(itemA.price) <= parseFloat(itemB.price)) {
@@ -375,6 +372,7 @@ function bubbleSort(array, property) {
     }
 
     if (changeCount <= 0 && indexNumber + 1 >= parseFloat(copiedArray.length)) {
+      //if there are no changes in a completed pass, it is sorted
       break
     }
   }
@@ -383,154 +381,70 @@ function bubbleSort(array, property) {
 
 
 
-function insertionSort(array, property, useRecursion = false) {
-  //this only will sort the price because idk how to dynamically assign a property to sort
-  
+
+function insertionSort(array) {
+ 
   /**
    * Sorts a given array with the insertion method
    * 
    * @param {object} An array
-   * @param {string} The... title? of the part of the object to search for
-   * @param {boolean} Weather to use the recursion method or not
    * 
    * @return {object} An array sorted from smallest to greatest
    * 
    */
   
-  
+
   let copiedArray = []
   let indexNumber = 0
   let index = 0
   let itemA = copiedArray[indexNumber]
   let itemB = copiedArray[indexNumber + 1]
 
-  if (useRecursion == true) { // check if recursion should be used
-    console.log('recusion is on')
-    indexNumber = 0
-    index = indexNumber
-    copiedArray = array.concat()
-   
 
-    while (true) {
-      itemA = copiedArray[indexNumber]
-      itemB = copiedArray[indexNumber + 1]
+  indexNumber = 0
+  index = indexNumber
+  copiedArray = array.concat()
 
-      if (parseFloat(itemA.price) > parseFloat(itemB.price)) { // check if it is already in order
-
-        const recursiveShiftToStart = (index) => {
-
-           /**
-           * recursively throws the index to where is should be so that it is in order
-           * 
-           * @param {number} The index to work with
-           * 
-           * @return {string} 'done' when the index hits the start of the array
-           * @return {the function itself} continue 
-           * 
-           */
-          if (index  < 0) {
-            return 'done'
-          } 
-          
-          else {
-            itemA = copiedArray[index]
-            itemB = copiedArray[index + 1]
-
-            if (parseFloat(itemA.price) != undefined && parseFloat(itemB.price) != undefined && parseFloat(itemA.price) > parseFloat(itemB.price)) { // ensure the swapping action does not corrupt the array contents
-              copiedArray.splice(index, 1, itemB)
-              copiedArray.splice(index + 1, 1, itemA)
-            }
-
-            return recursiveShiftToStart(index-1);
-          }
-        }
-
-        recursiveShiftToStart(indexNumber) // hello darkness my old friend
-      }
-
-      else if (parseFloat(itemA.price) <= parseFloat(itemB.price)) {
-        // console.log('===================')
-        // console.log('skiped this index')
-      }
-
-
-      indexNumber += 1
-      console.log(indexNumber / copiedArray.length *100 + '%') // print out progress 
-
-      if (indexNumber + 1>= copiedArray.length) { // stop sorting if end of array is reached 
-        // console.log('final=======================')
-        // console.log(copiedArray)
-        break
-      }
-    }
-  }
-
-
-
-
-  else { // this is an alternative to recursion sort here because I for whatever reason I misinterpreted the instructions as use recursion in the insertion sort algorithm. Recursion likes to hit stack errors.
-    indexNumber = 0
-    index = indexNumber
-    copiedArray = array.concat()
-
-    while (true) {
+  while (true) {
     itemA = copiedArray[indexNumber]
     itemB = copiedArray[indexNumber + 1]
     index = indexNumber
 
-      if (parseFloat(itemA.price) > parseFloat(itemB.price)) { // check if it is already in order
-        // console.log('there will be change')
-        while(true) {
+    if (parseFloat(itemA.price) > parseFloat(itemB.price)) { // check if it is already in order
+      while(true) {
 
-          if (index  < 0) {
-            // console.log('no changes')
-            break
-          } 
 
-          else {
-            itemA = copiedArray[index]
-            itemB = copiedArray[index + 1]
+        itemA = copiedArray[index]
+        itemB = copiedArray[index + 1]
 
-            if (parseFloat(itemA.price) != undefined && parseFloat(itemB.price) != undefined && parseFloat(itemA.price) > parseFloat(itemB.price)) { // ensure the swapping action does not corrupt the array contents
-              copiedArray.splice(index, 1, itemB)
-              copiedArray.splice(index + 1, 1, itemA)
-              // console.log('swapped')
-            }
-            index -= 1
-          }
+        if (parseFloat(itemA.price) != undefined && parseFloat(itemB.price) != undefined && parseFloat(itemA.price) > parseFloat(itemB.price)) { // ensure the swapping action does not corrupt the array contents
+          copiedArray.splice(index, 1, itemB)
+          copiedArray.splice(index + 1, 1, itemA)
+          // console.log('swapped')
         }
-      }
-
-      else if (parseFloat(itemA.price) <= parseFloat(itemB.price)) { // stop sorting if end of array is reached 
-        // console.log('===================')
-        // console.log('skiped this index')
-      }
-
-
-      indexNumber += 1
-      console.log(indexNumber / copiedArray.length *100 + '%') // print out progress 
-
-      if (indexNumber + 1>= copiedArray.length) {
-        // console.log('final=======================')
-        // console.log(copiedArray)
-        break
+        index -= 1
       }
     }
+
+
+    indexNumber += 1
+    // console.log(indexNumber / copiedArray.length *100 + '%') // print out progress 
+
+    if (indexNumber + 1>= copiedArray.length) {
+      // if the end of the array is hit, stop.
+      break
+    }
   }
-  //return final sorted array
+  // Hmmm. You were correct about there being excessive things going on.
   return copiedArray
 }
 
 
-function linearSearch(array, property, thingToSearch) {
- //this only will search for the price because idk how to dynamically assign a property to sort
-
-
+function linearSearch(array, thingToSearch) {
   /**
    * Searches for a thing inside a given array with the linear search method
    * 
    * @param {array} An array
-   * @param {string} The... title? of the part of the object to search for
    * @param {float} The number to search for
    * 
    * @return {number} The index of the item in the array
@@ -546,22 +460,18 @@ function linearSearch(array, property, thingToSearch) {
   }
 }
 
-function binarySearch(array, property, thingToSearch) {
-  //this only will search for the price because idk how to dynamically assign a property to sort
-
-
+function binarySearch(array, thingToSearch) {
   /**
    * Searches for a thing inside a given array with the binary search method
    * 
    * @param {array} An array
-   * @param {string} The... title? of the part of the object to search for
    * @param {float} The number to search for
    * 
    * @return {number} The index of the item in the array
    * @return {number} -1 if the item is not found
    * 
    */
-  let sortedArray = insertionSort(array, 'price')
+  let sortedArray = insertionSort(array)
   
   let front = 0
   let rear = sortedArray.length
@@ -582,8 +492,6 @@ function binarySearch(array, property, thingToSearch) {
     else {
       return currentIndex 
     }
-    // currentIndex = Math.floor(sortedArray.length / 2)
-
    }
    return -1
 }
@@ -595,14 +503,20 @@ function binarySearch(array, property, thingToSearch) {
 
 
 
-function recursiveAddition(numberToOperateUpon) {
 
-  const recursiveFactorial = (number, arrayOfNumbers = ['placeholder'], index = 0) => {
-  // console.log(arrayOfNumbers)
-  // console.log('number: ' + number)
-  // console.log('index: ' + index)
+
+
+
+
+
+
+
+
+
+
+  function recursiveAddition(number, arrayOfNumbers = ['placeholder'], index = 0) {
+
     if (arrayOfNumbers.length == 0) {
-
       return number;
     } 
     
@@ -613,13 +527,10 @@ function recursiveAddition(numberToOperateUpon) {
       }
 
       // add the value of the last index to the 'number', then delete that value in the arrayOfNumbers
-      return recursiveFactorial(number = parseFloat(number) + parseFloat(arrayOfNumbers[arrayOfNumbers.length - 1]), arrayOfNumbers = arrayOfNumbers.slice(0, arrayOfNumbers.length - 1), index + 0)
+      return recursiveAddition(number = parseFloat(number) + parseFloat(arrayOfNumbers[arrayOfNumbers.length - 1]), arrayOfNumbers = arrayOfNumbers.slice(0, arrayOfNumbers.length - 1), index + 0)
     }
   }
-  // console.log(recursiveFactorial(numberGivenToDoDemonstrateRecursion))
-  return recursiveFactorial(numberToOperateUpon)
 
-}
 
 
 function addition(numberToOperateUpon) {
@@ -690,7 +601,7 @@ console.log('\n\n\n\n')
 console.log('================ Bubble sort ================')
 
 startTime = new Date()
-console.log(bubbleSort(currentStockForSorting, 'price'))
+console.log(bubbleSort(currentStockForSorting))
 endTime = new Date()
 // console.log((endTime - startTime)/ 60000 + 'Minutes')
 
@@ -708,7 +619,7 @@ console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 console.log('================ Insertion sort ================')
 
 startTime = new Date()
-let sortedArrayForBinarySearch = insertionSort(currentStockForSorting, 'price')
+let sortedArrayForBinarySearch = insertionSort(currentStockForSorting)
 // console.log(insertionSort(currentStockForSorting, 'price'))
 console.log(sortedArrayForBinarySearch)
 endTime = new Date()
@@ -726,7 +637,7 @@ console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 console.log('================ Linear search ================')
 
 startTime = new Date()
-console.log(linearSearch(currentStockForSorting, 'price', priceToSearchFor))
+console.log(linearSearch(currentStockForSorting, priceToSearchFor))
 console.log('Price of' + priceToSearchFor + 'is at index # ^^^')
 endTime = new Date()
 
@@ -745,8 +656,8 @@ console.log('\n\n\n\n\n')
 console.log('================ Binary search ================')
 
 startTime = new Date()
+console.log(binarySearch(currentStockForSorting, priceToSearchFor))
 console.log('Price of' + priceToSearchFor + 'is at index # ^^^')
-console.log(binarySearch(currentStockForSorting, 'price', priceToSearchFor))
 endTime = new Date()
 
 fs.appendFile('results.txt', '\nBinary search (without the time taken sorting) took ' + (endTime - startTime) + 'Ms', (err, data) => { 
@@ -785,7 +696,6 @@ console.log('\n\n\n\n')
 console.log('What happens if you take the numbers of ' + numberGivenToDoDemonstrateRecursion + ' and added them all together? (No recursion)')
 console.log('You get: ' + addition(numberGivenToDoDemonstrateRecursion))
 
-// i seem to have forgotten the existance of problem 2 until it was time to submit. Oops.
 
 
 
