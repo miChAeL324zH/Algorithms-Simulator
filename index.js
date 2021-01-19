@@ -1,4 +1,5 @@
 // may not work properly outside of repl.it
+// Hello. Change history is marked in Github fashion. https://github.com/miChAeL324zH/Algorithms-Simulator
 console.log('Hewwo world!!!')
 
 const fs = require("fs");
@@ -53,27 +54,23 @@ let itemNumber = 0
 
 for (i in initialDataStorage) { // throw stuff from txt into array
 
-
   if (Number.isInteger(i/4) && i != 0) {
     orderThingy('Set Up Program', i/4)
     
-var attachPropertyToFurniture = new Furniture(initialDataStorage[name], initialDataStorage[material], initialDataStorage[colour], parseFloat(initialDataStorage[price]))
+    var attachPropertyToFurniture = new Furniture(initialDataStorage[name], initialDataStorage[material], initialDataStorage[colour], parseFloat(initialDataStorage[price]))
 
-currentStock.push(attachPropertyToFurniture)
-
-
+    currentStock.push(attachPropertyToFurniture)
   }
-  
 }
 
 
 console.log('We currenly can ship these things\n')
 for (i in currentStock) { // throw stuff from txt into array
-    console.log(`${i}: ${currentStock[i].name}`)
+  console.log(`${i}: ${currentStock[i].name}`)
 
-    if (i > 20) { // limit display of items
-      break
-    }
+  if (i > 20) { // limit display of items
+    break
+  }
 }
 
 var bobOrder = 0
@@ -548,6 +545,50 @@ function addition(numberToOperateUpon) {
 
 
 
+function palindromes(wordToOperateUpon) {
+  let palindromeCount = 0
+  let arrayOfLetters = wordToOperateUpon.split('')
+  let pivotPoint = parseFloat(Math.floor(arrayOfLetters.length / 2))
+  let indexToOneSide = 1
+  // console.log(arrayOfLetters)
+  // console.log(arrayOfLetters[pivotPoint]) // sanity checks
+
+
+  while (true) {
+
+    if (arrayOfLetters[pivotPoint + indexToOneSide].toLowerCase() == arrayOfLetters[pivotPoint - indexToOneSide].toLowerCase()) {
+      palindromeCount += 1
+    }
+
+    indexToOneSide += 1
+    
+    if (indexToOneSide + pivotPoint >= arrayOfLetters.length) {
+      break
+    }
+  }
+  return palindromeCount
+}
+
+function recursivePalindromes(wordToOperateUpon, palindromeCount = 0, indexToOneSide = 1) {
+  let arrayOfLetters = wordToOperateUpon.split('')
+  let pivotPoint = parseFloat(Math.floor(arrayOfLetters.length / 2))
+  // console.log(arrayOfLetters)
+  // console.log(arrayOfLetters[pivotPoint])
+
+
+  if (indexToOneSide + pivotPoint >= arrayOfLetters.length) { // if the end of the array is hit, there is no more letter to process
+    return palindromeCount;
+  } 
+
+  else {
+    if (arrayOfLetters[pivotPoint + indexToOneSide].toLowerCase() == arrayOfLetters[pivotPoint - indexToOneSide].toLowerCase()) {
+      return recursivePalindromes(wordToOperateUpon, palindromeCount += 1, indexToOneSide += 1)
+    }
+
+    return recursivePalindromes(wordToOperateUpon, palindromeCount = palindromeCount, indexToOneSide += 1)
+  }
+}
+
 
 
 
@@ -687,6 +728,9 @@ fs.appendFile('results.txt', '\nRegular search took ' + (endTime - startTime) + 
 })
 
 
+/** 
+ * recursion slum
+ */
 console.log('\n\n\n\n')
 let numberGivenToDoDemonstrateRecursion = '2618452'
 console.log('What happens if you take the numbers of ' + numberGivenToDoDemonstrateRecursion + ' and added them all together?')
@@ -696,8 +740,9 @@ console.log('\n\n\n\n')
 console.log('What happens if you take the numbers of ' + numberGivenToDoDemonstrateRecursion + ' and added them all together? (No recursion)')
 console.log('You get: ' + addition(numberGivenToDoDemonstrateRecursion))
 
-
-
+console.log('\n\n\n\n')
+console.log('There are ' + palindromes('lrAcEcARI') + ' palindromes in "lrAcEcARI"')
+console.log('There are ' + recursivePalindromes('EpOkayAkop') + ' palindromes in "EpOkayAkop"')
 
 
 // i use this to generate more data for the sorting greater than 2mb of data part
