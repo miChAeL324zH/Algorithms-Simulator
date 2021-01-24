@@ -1,5 +1,5 @@
 // may not work properly outside of repl.it
-// Hello. Change history is marked in Github fashion. https://github.com/miChAeL324zH/Algorithms-Simulator
+// Hello. Changes is marked in Github fashion. https://github.com/miChAeL324zH/Algorithms-Simulator
 console.log('Hewwo world!!!')
 
 const fs = require("fs");
@@ -455,6 +455,7 @@ function linearSearch(array, thingToSearch) {
       return parseInt(i)
     }
   }
+  return -1
 }
 
 function binarySearch(array, thingToSearch) {
